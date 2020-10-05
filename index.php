@@ -10,6 +10,22 @@ function maximum($some_array){
     return $max_v;
 }
 
-$answer=maximum($array1);
-echo $answer;
+echo maximum($array1).'<br/>';
+
+$len = count($array1);
+
+for ($i = 0; $i < $len ; $i++){
+    $len--;
+    for ($i2 = 0; $i2 < $len ; $i2++){
+        if($array1[$i2]>$array1[$i2+1]){
+            $bufer = $array1[$i2];
+            $array1[$i2] = $array1[$i2+1];
+            $array1[$i2+1] = $bufer;
+        }
+    }
+}
+
+foreach ($array1 as $varib){
+    echo $varib.',';
+}
 ?>
