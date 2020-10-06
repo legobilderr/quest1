@@ -33,26 +33,26 @@ echo '<br/>';
 
 
 
-function b_serch ($some_array,$serch_obj){
+function b_serch ($some_array, $serch_obj){
     $len = count($some_array);
-    $meedle = floor($len/2);
-    $step=$meedle/2;
-    for ($i = 0; $i < $len;$i++){
-        if ($serch_obj==$some_array[$meedle]){
-            $answer=$meedle+1;
+    $meedle = floor($len / 2);
+    $step = $meedle/2;
+    for ($i = 0; $i < $len; $i++){
+        if ($serch_obj == $some_array[$meedle]){
+            $answer = $meedle+1;
             echo  'его номер в списке : ';
             echo $answer;
             return ;            
         }
-        elseif ($serch_obj<$some_array[$meedle] || $meedle>=$len ){
-            $meedle=floor($meedle-$step);
-            $step=$step/2;
+        elseif ($serch_obj < $some_array[$meedle] || $meedle >= $len ){
+            $meedle = floor($meedle - $step);
+            $step = $step / 2;
             // echo $meedle;
             // echo ' шаг назат </br>';
         }
         else {
-            $meedle=ceil($meedle+$step);
-            $step=$step/2;
+            $meedle = ceil($meedle + $step);
+            $step = $step / 2;
             // echo $meedle;
             // echo ' шаг вперёд </br>';
         }
