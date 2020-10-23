@@ -51,23 +51,23 @@ function b_search($some_array, $serch_obj)
             return;
         } else echo 'вы ищите в пустом массиве';
     };
-    $meedle = floor($len / 2);
-    $step = $meedle / 2;
+    $middle = floor($len / 2);
+    $step = $middle / 2;
     for ($i = 0; $i < ($len / 2) + 1; $i++) {
-        if ($serch_obj == $some_array[$meedle]) {
-            $answer = $meedle + 1;
+        if ($serch_obj == $some_array[$middle]) {
+            $answer = $middle + 1;
             echo  'его номер в списке : ';
             echo $answer;
             return;
-        } elseif ($serch_obj < $some_array[$meedle] || $meedle >= $len) {
-            $meedle = floor($meedle - $step);
+        } elseif ($serch_obj < $some_array[$middle] || $middle >= $len) {
+            $middle = floor($middle - $step);
             $step = $step / 2;
-            // echo $meedle;
+            // echo $middle;
             // echo ' шаг назат </br>';
         } else {
-            $meedle = ceil($meedle + $step);
+            $middle = ceil($middle + $step);
             $step = $step / 2;
-            // echo $meedle;
+            // echo $middle;
             // echo ' шаг вперёд </br>';
         }
     }
@@ -89,11 +89,11 @@ echo '<br/>';
 //     FOREIGN KEY(tag_id) REFERENCES tags(id) ON delete cascade ON update cascade 
 // );
 
-// select products.name as product_name, product_id, count(*)
+// select products.name as product_name, count(*)
 // from relations
 //     left join products on products.id = relations.product_id
 //     left join tags on tags.id = relations.tag_id
-// GROUP BY products.name,product_id
+// GROUP BY products.name
 // having count(tag_id)>10;
 
 echo '<br/>';
@@ -108,11 +108,11 @@ class Vector2d
     private $coordx;
     private $coordy;
 
-    public function __construct($array)
+    public function __construct($values1, $values2)
     {
-        if ($this->type_values($array)) {
-            $this->coordx = $array[0];
-            $this->coordy = $array[1];
+        if ($this->type_values($values1, $values2)) {
+            $this->coordx = $values1;
+            $this->coordy = $values2;
         } else {
             echo 'предоставленные типы данных не подходят для создания этого класса ';
             exit;
@@ -121,23 +121,24 @@ class Vector2d
 
     public function summ_vector($vector)
     {
-        $this->coordx = $this->coordx + $vector->coordx;
-        $this->coordy = $this->coordy + $vector->coordy;
-        return [$this->coordx, $this->coordy];
+        $new_coordx = $this->coordx + $vector->coordx;
+        $new_coordy = $this->coordy + $vector->coordy;
+        return new Vector2d($new_coordx, $new_coordy);
     }
+
 
     public function diff_vector($vector)
     {
-        $this->coordx = $this->coordx - $vector->coordx;
-        $this->coordy = $this->coordy - $vector->coordy;
-        return [$this->coordx, $this->coordy];
+        $new_coordx = $this->coordx - $vector->coordx;
+        $new_coordy = $this->coordy - $vector->coordy;
+        return new Vector2d($new_coordx, $new_coordy);
     }
 
     public function multiply_on_number($number)
     {
-        $this->coordx = $this->coordx * $number;
-        $this->coordy = $this->coordy * $number;
-        return [$this->coordx, $this->coordy];
+        $new_coordx =  $this->coordx * $number;
+        $new_coordy =  $this->coordy * $number;
+        return new Vector2d($new_coordx, $new_coordy);
     }
 
     public function __toString()
@@ -145,30 +146,30 @@ class Vector2d
         return "coords :$this->coordx,$this->coordy";
     }
 
-    public function type_values($array)
+    private function type_values($values1, $values2)
     {
-        if (gettype($array) == "array" && count($array) == 2) {
-            foreach ($array as $val) {
-                switch (gettype($val)) {
-                    case 'float':
-                        break;
-                    case 'integer':
-                        break;
-                    default:
-                        return false;
-                }
+        $array = array($values1, $values2);
+        foreach ($array as $val) {
+            switch (gettype($val)) {
+                case 'double':
+                    break;
+                case 'integer':
+                    break;
+                default:
+                    return false;
             }
-            return true;
-        } else {
-            return false;
         }
+        return true;
     }
 }
-$vector = new Vector2d(array(2, 'misha'));
-// $vector1 = new Vector2d([12, 6]);
+$vector = new Vector2d(2, 4.5);
+$vector1 = new Vector2d(12, 6);
+$vector2 = $vector->summ_vector($vector1);
+$vector3 = $vector->diff_vector($vector1);
+$vector5 = $vector3->multiply_on_number(5);
 
-$vector->multiply_on_number(1);
-echo $vector;
+
+echo $vector2;
 
 
 
@@ -207,4 +208,4 @@ function is_polidrom($string)
     }
 }
 
-is_polidrom('Step on no pets');
+is_polidrom('122111');
