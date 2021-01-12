@@ -1,6 +1,6 @@
 <?php
 
-//задание 1
+// 1
 
 $array1 = array(5, 6, 3424, 324, 4553, 23, -1, 23, -566, 32423, 234, 8742, -4627, 6, 3, 84, 246,);
 function maximum($some_array)
@@ -17,7 +17,7 @@ function maximum($some_array)
 echo maximum($array1) . '<br/>';
 
 
-//задание 2
+//2
 
 $len = count($array1) - 1;
 
@@ -39,7 +39,7 @@ foreach ($array1 as $varib) {
 echo '<br/>';
 
 
-//задание 4
+// 4
 
 
 function b_search($some_array, $serch_obj)
@@ -47,38 +47,36 @@ function b_search($some_array, $serch_obj)
     $len = count($some_array);
     if ($len < 1 || $serch_obj == null) {
         if ($serch_obj == null) {
-            echo 'искомый обьект равен ничему . он находиться в нигде  ';
+            echo 'the desired object is equal to nothing. he is in nowhere ';
             return;
-        } else echo 'вы ищите в пустом массиве';
+        } else echo 'you are looking in an empty array';
     };
     $middle = floor($len / 2);
     $step = $middle / 2;
     for ($i = 0; $i < ($len / 2) + 1; $i++) {
         if ($serch_obj == $some_array[$middle]) {
             $answer = $middle + 1;
-            echo  'его номер в списке : ';
+            echo  'its number in the list: ';
             echo $answer;
             return;
         } elseif ($serch_obj < $some_array[$middle] || $middle >= $len) {
             $middle = floor($middle - $step);
             $step = $step / 2;
-            // echo $middle;
-            // echo ' шаг назат </br>';
+
         } else {
             $middle = ceil($middle + $step);
             $step = $step / 2;
-            // echo $middle;
-            // echo ' шаг вперёд </br>';
+
         }
     }
-    echo 'этого элемента нет в списке ';
+    echo 'this item is not in the list';
 }
 b_search($array1, 23);
 
 echo '<br/>';
 
 
-//задание 3
+// 3
 
 // CREATE TABLE if not exists relations
 // (
@@ -99,7 +97,7 @@ echo '<br/>';
 echo '<br/>';
 
 
-//задание 5
+// 5
 
 
 
@@ -114,7 +112,7 @@ class Vector2d
             $this->coordx = $values1;
             $this->coordy = $values2;
         } else {
-            echo 'предоставленные типы данных не подходят для создания этого класса ';
+            echo 'the datatypes provided are not suitable for creating this class';
             exit;
         }
     }
@@ -177,7 +175,7 @@ echo $vector2;
 echo '<br/>';
 
 
-//задание 6
+// 6
 
 function revers_string($string)
 {
@@ -197,14 +195,14 @@ function is_polidrom($string)
 {
     $string = mb_strtolower(str_replace(" ", "", $string));
     // if ($string==strrev($string)){
-    //     echo ' это строка полиндром';}
+    //     echo ' this is a polyindrome string';}
     // else {
-    //     echo ' это строка не полиндром';
+    //     echo ' this line is not a polyindrome';
     //}
     if ($string == revers_string($string)) {
-        echo ' это строка полиндром';
+        echo ' this is a polyindrome string';
     } else {
-        echo ' это строка не полиндром';
+        echo ' this line is not a polyindrome';
     }
 }
 
